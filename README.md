@@ -7,8 +7,8 @@
 [Range Tree Analysis - COMP90077](https://github.com/jamesb2505/comp90077-ass2)  
 
 ### Distributed Systems  
-[Distributed Whiteboard - COMP90015](https://github.com/jamesb2505/comp90015-ass1)  
-[Distributed Dictionary - COMP90015](https://github.com/jamesb2505/comp90015-ass2)  
+[Distributed Dictionary - COMP90015](https://github.com/jamesb2505/comp90015-ass1)  
+[Distributed Whiteboard - COMP90015](https://github.com/jamesb2505/comp90015-ass2)  
 
 ## Bachelor of Science  
 
