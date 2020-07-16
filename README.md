@@ -11,7 +11,7 @@
 [Distributed Whiteboard - COMP90015](https://github.com/jamesb2505/comp90015-ass2)  
 
 ### Machine Learning
-[Naive Bayes - COMP90049](https://github.com/jamesb2505/comp90049-ass1)
+[Naive Bayes - COMP90049](https://github.com/jamesb2505/comp90049-ass1)  
 [Research Project - COMP90049](https://github.com/jamesb2505/comp90049-ass2)
 
 ## Bachelor of Science  
