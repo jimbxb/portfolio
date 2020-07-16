@@ -18,5 +18,5 @@
 
 ### Capstone Project  
 #### COMP30022 - IT Project  
-[Frontend](https://github.com/isubasinghe/COMP30022-frontend)  
-[Backend](https://github.com/isubasinghe/COMP30022-backend)  
+[Frontend](https://github.com/jamesb2505/comp30022-frontend)  
+[Backend](https://github.com/jamesb2505/comp30022-backend)  
