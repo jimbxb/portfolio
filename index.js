@@ -109,3 +109,55 @@ const fmtPortfolioItem = ({name, links, desc}) => (
     ""
   ].concat(desc).concat([""])
 );
+
+const terminal = (root) => (command, term) => {
+  const {name, args} = root.parse_command(command);
+  const arity = args.length;
+  
+  switch (name) {
+    case "help":
+    case "clear":
+    case "contact":
+    case "credits":
+    case "greetings":
+      if (0 !== args.length) {
+        term.error(`[Arity] Wrong number of arguments. Function '${name}' expects ${0} got ${arity}!`);
+        return;
+      }
+  }
+
+  switch (name) {
+    case "help":
+      term.echo(content.help.text.concat(content.help.commands.flatMap(fmtHelpItem)).join("\n"));
+      break;
+    case "contact":
+      term.echo(content.contact.items.flatMap(fmtContactItem, []).join("\n"));
+      break;
+    case "credits":
+      term.echo(content.credits.items.flatMap(fmtCreditItem, []).join("\n"));
+      break;
+    case "greetings":
+      term.echo(content.greetings.lines.join("\n"));
+      break;
+    case "portfolio":
+      const query = args.length ? args : [""];
+      const items = content.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
+      term.echo(items.flatMap(fmtPortfolioItem, []).slice(1).join("\n"));
+      break;
+    default:
+      term.error(`Command '${name}' Not Found!`);
+  }
+}
+
+const terminalArgs = {
+  greetings: content.greetings.lines.concat(content.greetings.start).join("\n"),
+  checkArity: false,
+  completion: [
+    "help",
+    "clear",
+    "contact",
+    "credits",
+    "portfolio",
+    "greetings"
+  ]
+}
