@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal@2.x.x/js/jquery.terminal.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"></script>
+  </head>
+  <body id="terminal"></body>
+  <script>
+    const data = {
+      help: {
+        text: "Welcome to my portfolio.\nType one of the following commands to continue:\n",
+        commands: [
+          { name: "help", desc: ["Displays this message"] },
+          { name: "clear", desc: ["Clears the terminal"] },
+          { name: "contact", desc: ["Display's my contact information"] },
+          { name: "credits", desc: ["Displays a list of credits"] },
+          { name: "portfolio [query...]", desc: [
+            "Displays a list of portfolio items.", 
+            "`query` is used to search for portfolio items. e.g. `portfolio foo bar` will search for projects with \"foo\" and \"bar\" in the title"
+          ] }
+        ]
+      },
+      greeting: {
+        lines: [
+          "       __                             ____                            ",
+          "      / /___ _____ ___  ___  _____   / __ )____ __________  ___  _____ ",
+          " __  / / __ `/ __ `__ \\/ _ \\/ ___/  / __  / __ `/ ___/ __ \\/ _ \\/ ___/",
+          "/ /_/ / /_/ / / / / / /  __(__  )  / /_/ / /_/ / /  / / / /  __(__  )  ",
+          "\\____/\\__,_/_/ /_/ /_/\\___/____/  /_____/\\__,_/_/  /_/ /_/\\___/____/   ",
+          "   / __ \\____  _____/ /_/ __/___  / (_)___                             ",
+          "  / /_/ / __ \\/ ___/ __/ /_/ __ \\/ / / __ \\                            ",
+          " / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /                            ",
+          "/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/                             ",
+          "",
+          "Type `help` to begin.",
+          ""
+        ]
+      },
+      contact: {
+        items: [
+          { name: "email", data: "jamesbarnes2505@gmail.com" },
+          { name: "github", data: "https://github.com/jimbxb" }
+        ]
+      },
+      credits: {
+        items: [
+          { name: "JQueryTerminal", data: "https://terminal.jcubic.pl/" }
+        ]
+      },
+      portfolio: {
+        sep: "~~~~~~~~",
+        items: [
+          { 
+            name: "Scalr.io -- UniHack'21 Project", 
+            desc: ["First prize winning UniHack'21 submission built by my team, Null Pointer"], 
+            links: [
+              "https://github.com/jimbxb/unihack21-backend", 
+              "https://github.com/jimbxb/unihack21-frontend"
+            ]
+          },
+          { 
+            name: "Airloom -- BSc Capstone Project",
+            links: [
+              "https://github.com/jimbxb/comp30022-backend", 
+              "https://github.com/jimbxb/comp30022-frontend"
+            ], 
+            desc: [
+              "University of Melbourne Bachelor of Science, Computing and Software Systems major, capstone project.", 
+              "A family heirloom register."
+            ]
+          },
+        ]
+      }
+    };
+
+    const fmtHelpItem = ({name, desc}) => (
+      [` * ${name}`].concat(desc.map(line => "\t" + line))
+    );
+
+    const fmtContactItem = ({name, data}) => (
+      [`${name}: ${data}`]
+    );
+
+    const fmtCreditItem = ({name, data}) => (
+      [` * ${name}: ${data}`]
+    );
+
+    const fmtPortfolioItem = ({name, links, desc}) => {
+      return [
+        data.portfolio.sep,
+        "", 
+        `[[b;;]${name}]: ${(links ?? []).join(" ; ")}`, 
+        ""
+      ].concat(desc).concat([""])
+    };
+
+    $("#terminal").terminal((command, term) => {
+      const [name, ...args] = command.trim().split(/\s/);
+      const arity = args.length;
+      
+      switch (name) {
+        case "help":
+        case "contact":
+        case "credits":
+          if (0 !== args.length) {
+            term.error(`[Arity] Wrong number of arguments. Function '${name}' expects ${0} got ${arity}!`);
+            return;
+          }
+      }
+
+      switch (name) {
+        case "help":
+          term.echo(data.help.commands.flatMap(fmtHelpItem, [data.help.text]).join("\n"));
+          break;
+        case "contact":
+          term.echo(data.contact.items.flatMap(fmtContactItem, []).join("\n"));
+          break;
+        case "credits":
+          term.echo(data.credits.items.flatMap(fmtCreditItem, []).join("\n"));
+          break;
+        case "portfolio":
+          const query = args.length ? args : [""];
+          const items = data.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
+          term.echo(items.flatMap(fmtPortfolioItem, []).slice(1).join("\n"));
+        default:
+          term.error(`Command '${name}' Not Found!`);
+      }
+    }, {
+      greetings: data.greeting.lines.join("\n"),
+      checkArity: false
+    })
+  </script>
+</html>

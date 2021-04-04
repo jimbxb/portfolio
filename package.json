@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "## Master of Computer Science",
+  "main": "index.js",
+  "scripts": {
+    "start": "reload -b",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimbxb/portfolio.git"
+  },
+  "author": "James Barnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimbxb/portfolio/issues"
+  },
+  "homepage": "https://github.com/jimbxb/portfolio#readme",
+  "devDependencies": {
+    "reload": "^3.1.1"
+  }
+}
