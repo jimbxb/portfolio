@@ -126,7 +126,7 @@
         case "contact":
         case "credits":
         case "greetings":
-          if (0 !== args.length) {
+          if (0 !== arity) {
             term.error(`[Arity] Wrong number of arguments. Function '${name}' expects ${0} got ${arity}!`);
             return;
           }
