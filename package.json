@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "## Master of Computer Science",
+  "description": "Portfolio Site",
   "main": "index.js",
   "scripts": {
     "start": "reload -b",
