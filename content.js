@@ -1,73 +1,4 @@
 const content = {
-  "help": {
-    "text": [
-      "Type one of the following commands and press <enter>:"
-    ],
-    "commands": [
-      { 
-        "name": "help", 
-        "desc": ["Displays this message."] 
-      },
-      { 
-        "name": "contact", 
-        "desc": ["Display's my contact information."] 
-      },
-      { 
-        "name": "list", 
-        "desc": ["Displays a list of portfolio items."]
-      },
-      {
-        "name": "search <query>",
-        "desc": [
-          "Searches the portfolio items for relevant items.",
-          "<query> should be replaced with the search terms.",
-          "\t e.g. `search foo bar` searches for items with \"foo\" and \"bar\" in the title." 
-        ]
-      },
-      { 
-        "name": "credits", 
-        "desc": ["Displays a list of credits."]
-      }
-    ]
-  },
-  "greetings": {
-    "lines": [
-      "       __                             ____",
-      "      / /___ _____ ___  ___  _____   / __ )____ __________  ___  _____",
-      " __  / / __ `/ __ `__ \\/ _ \\/ ___/  / __  / __ `/ ___/ __ \\/ _ \\/ ___/",
-      "/ /_/ / /_/ / / / / / /  __(__  )  / /_/ / /_/ / /  / / / /  __(__  )",
-      "\\____/\\__,_/_/ /_/ /_/\\___/____/  /_____/\\__,_/_/  /_/ /_/\\___/____/",
-      "   / __ \\____  _____/ /_/ __/___  / (_)___",
-      "  / /_/ / __ \\/ ___/ __/ /_/ __ \\/ / / __ \\",
-      " / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /",
-      "/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/",
-      ""
-    ], 
-    "start": [
-      "Type `list` or `help` to begin.",
-      ""
-    ]
-  },
-  "contact": {
-    "items": [
-      { 
-        "name": "email", 
-        "data": "jamesbarnes2505@gmail.com" 
-      },
-      { 
-        "name": "github", 
-        "data": "https://github.com/jimbxb/" 
-      }
-    ]
-  },
-  "credits": {
-    "items": [
-      { 
-        "name": "JQueryTerminal", 
-        "data": "https://terminal.jcubic.pl/" 
-      }
-    ]
-  },
   "portfolio": {
     "error": "No items found.",
     "items": [
@@ -96,5 +27,96 @@ const content = {
         ]
       }
     ]
+  },
+  "commands": {
+    "help": {
+      "command": "help",
+      "arity": 0,
+      "text": [
+        "Type one of the following commands and press <enter>:"
+      ],
+      "commands": [
+        { 
+          "name": "help", 
+          "desc": ["Displays this message."] 
+        },
+        { 
+          "name": "contact", 
+          "desc": ["Displays my contact information."] 
+        },
+        { 
+          "name": "list", 
+          "desc": ["Displays a list of portfolio items."]
+        },
+        {
+          "name": "search <query>",
+          "desc": [
+            "Searches the portfolio items for relevant items.",
+            "<query> should be replaced with the search terms.",
+            "\t e.g. `search foo bar` searches for items with \"foo\" and \"bar\" in the title." 
+          ]
+        },
+        { 
+          "name": "credits", 
+          "desc": ["Displays a list of credits."]
+        }
+      ]
+    }, 
+    "clear": {
+      "command": "clear",
+      "arity": 0
+    },
+    "greetings": {
+      "command": "greetings",
+      "arity": 0,
+      "lines": [
+        "       __                             ____",
+        "      / /___ _____ ___  ___  _____   / __ )____ __________  ___  _____",
+        " __  / / __ `/ __ `__ \\/ _ \\/ ___/  / __  / __ `/ ___/ __ \\/ _ \\/ ___/",
+        "/ /_/ / /_/ / / / / / /  __(__  )  / /_/ / /_/ / /  / / / /  __(__  )",
+        "\\____/\\__,_/_/ /_/ /_/\\___/____/  /_____/\\__,_/_/  /_/ /_/\\___/____/",
+        "   / __ \\____  _____/ /_/ __/___  / (_)___",
+        "  / /_/ / __ \\/ ___/ __/ /_/ __ \\/ / / __ \\",
+        " / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /",
+        "/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/",
+        ""
+      ], 
+      "start": [
+        "Type `list` or `help` to begin.",
+        ""
+      ]
+    },
+    "contact": {
+      "command": "contact",
+      "arity": 0,
+      "items": [
+        { 
+          "name": "email", 
+          "data": "jamesbarnes2505@gmail.com" 
+        },
+        { 
+          "name": "github", 
+          "data": "https://github.com/jimbxb/" 
+        }
+      ]
+    },
+    "credits": {
+      "command": "credits",
+      "arity": 0,
+      "items": [
+        { 
+          "name": "JQueryTerminal", 
+          "data": "https://terminal.jcubic.pl/" 
+        }
+      ]
+    },
+    "list": {
+      "command": "list",
+      "arity": 0,
+    },
+    "search": {
+      "command": "search",
+      "arity": -1,
+    }
   }
-}
+}  
