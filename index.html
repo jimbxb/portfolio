@@ -7,7 +7,7 @@
   </head>
   <body id="terminal"></body>
   <script>
-    const data = {
+    const content = {
       help: {
         text: [
           "Welcome to my portfolio.",
@@ -27,20 +27,20 @@
             desc: ["Display's my contact information."] 
           },
           { 
-            name: "credits", 
-            desc: ["Displays a list of credits."]
-          },
-          { 
-            name: "portfolio [query...]", 
+            name: "portfolio [query]", 
             desc: [
               "Displays a list of portfolio items.", 
               "`query` is used to search for portfolio items.",
               "e.g. `portfolio foo bar` will search for projects with \"foo\" and \"bar\" in the title"
             ]
+          },
+          { 
+            name: "credits", 
+            desc: ["Displays a list of credits."]
           }
         ]
       },
-      greeting: {
+      greetings: {
         lines: [
           "       __                             ____                            ",
           "      / /___ _____ ___  ___  _____   / __ )____ __________  ___  _____ ",
@@ -51,7 +51,9 @@
           "  / /_/ / __ \\/ ___/ __/ /_/ __ \\/ / / __ \\                            ",
           " / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /                            ",
           "/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/                             ",
-          "",
+          ""
+        ], 
+        start: [
           "Type `help` to begin.",
           ""
         ]
@@ -68,7 +70,7 @@
         ]
       },
       portfolio: {
-        sep: "~~~~~~~~",
+        error: "No portfolio items found.",
         items: [
           { 
             name: "Scalr.io -- UniHack'21 Project", 
@@ -105,20 +107,19 @@
     );
 
     const fmtCreditItem = ({name, data}) => (
-      [` * ${name}: ${data}`]
+      [`${name}: ${data}`]
     );
 
     const fmtPortfolioItem = ({name, links, desc}) => (
       [
-        data.portfolio.sep,
         "", 
-        `[[b;;]${name}]: ${(links ?? []).join(" ; ")}`, 
+        `[[bu;;]${name}]: ${(links ?? []).join(" | ")}`, 
         ""
       ].concat(desc).concat([""])
     );
 
     $("#terminal").terminal((command, term) => {
-      const [name, ...args] = command.trim().split(/\s/);
+      const {name, args} = $.terminal.parse_command(command);
       const arity = args.length;
       
       switch (name) {
@@ -126,6 +127,7 @@
         case "clear":
         case "contact":
         case "credits":
+        case "greetings":
           if (0 !== args.length) {
             term.error(`[Arity] Wrong number of arguments. Function '${name}' expects ${0} got ${arity}!`);
             return;
@@ -134,31 +136,38 @@
 
       switch (name) {
         case "help":
-          term.echo(data.help.text.concat(data.help.commands.flatMap(fmtHelpItem)).join("\n"));
+          term.echo(content.help.text.concat(content.help.commands.flatMap(fmtHelpItem)).join("\n"));
           break;
         case "contact":
-          term.echo(data.contact.items.flatMap(fmtContactItem, []).join("\n"));
+          term.echo(content.contact.items.flatMap(fmtContactItem).join("\n"));
           break;
         case "credits":
-          term.echo(data.credits.items.flatMap(fmtCreditItem, []).join("\n"));
+          term.echo(content.credits.items.flatMap(fmtCreditItem).join("\n"));
+          break;
+        case "greetings":
+          term.echo(content.greetings.lines.join("\n"));
           break;
         case "portfolio":
           const query = args.length ? args : [""];
-          const items = data.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
-          term.echo(items.flatMap(fmtPortfolioItem, []).slice(1).join("\n"));
+          const items = content.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
+          if (items.length)
+            term.echo(items.flatMap(fmtPortfolioItem).join("\n"));
+          else 
+            term.error(content.portfolio.error);
           break;
         default:
           term.error(`Command '${name}' Not Found!`);
       }
     }, {
-      greetings: data.greeting.lines.join("\n"),
+      greetings: content.greetings.lines.concat(content.greetings.start).join("\n"),
       checkArity: false,
       completion: [
         "help",
         "clear",
         "contact",
         "credits",
-        "portfolio"
+        "portfolio",
+        "greetings"
       ]
     })
   </script>
