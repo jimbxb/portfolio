@@ -23,7 +23,7 @@ const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
 const buildTerminal = (parseCommand, {portfolio, commands}) => {
   const {help, greetings, contact, credits, list, search} = commands;
 
-  return ([
+  return [
     (command, term) => {
       const {name, args} = parseCommand(command);
       const arity = args.length;
@@ -66,10 +66,11 @@ const buildTerminal = (parseCommand, {portfolio, commands}) => {
       } else {
         term.error(`Unknown command \`${name}\`.`);
       }
-    }, {
+    }, 
+    {
       greetings: greetings.lines.concat(greetings.start).join("\n"),
       checkArity: false,
       completion: Object.keys(commands)
     }
-  ])
+  ];
 };
