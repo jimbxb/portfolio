@@ -9,16 +9,35 @@
   <script>
     const data = {
       help: {
-        text: "Welcome to my portfolio.\nType one of the following commands to continue:\n",
+        text: [
+          "Welcome to my portfolio.",
+          "Type one of the following commands to continue:"
+        ],
         commands: [
-          { name: "help", desc: ["Displays this message"] },
-          { name: "clear", desc: ["Clears the terminal"] },
-          { name: "contact", desc: ["Display's my contact information"] },
-          { name: "credits", desc: ["Displays a list of credits"] },
-          { name: "portfolio [query...]", desc: [
-            "Displays a list of portfolio items.", 
-            "`query` is used to search for portfolio items. e.g. `portfolio foo bar` will search for projects with \"foo\" and \"bar\" in the title"
-          ] }
+          { 
+            name: "help", 
+            desc: ["Displays this message."] 
+          },
+          { 
+            name: "clear", 
+            desc: ["Clears the terminal."]
+          },
+          { 
+            name: "contact", 
+            desc: ["Display's my contact information."] 
+          },
+          { 
+            name: "credits", 
+            desc: ["Displays a list of credits."]
+          },
+          { 
+            name: "portfolio [query...]", 
+            desc: [
+              "Displays a list of portfolio items.", 
+              "`query` is used to search for portfolio items.",
+              "e.g. `portfolio foo bar` will search for projects with \"foo\" and \"bar\" in the title"
+            ]
+          }
         ]
       },
       greeting: {
@@ -40,7 +59,7 @@
       contact: {
         items: [
           { name: "email", data: "jamesbarnes2505@gmail.com" },
-          { name: "github", data: "https://github.com/jimbxb" }
+          { name: "github", data: "https://github.com/jimbxb/" }
         ]
       },
       credits: {
@@ -53,17 +72,20 @@
         items: [
           { 
             name: "Scalr.io -- UniHack'21 Project", 
-            desc: ["First prize winning UniHack'21 submission built by my team, Null Pointer"], 
+            desc: [
+              "First prize winning UniHack'21 submission built by my team, Null Pointer.",
+              "Scalr.io offers a machine learning platform built for anyone to use."
+            ], 
             links: [
-              "https://github.com/jimbxb/unihack21-backend", 
-              "https://github.com/jimbxb/unihack21-frontend"
+              "https://github.com/jimbxb/unihack21-backend/", 
+              "https://github.com/jimbxb/unihack21-frontend/"
             ]
           },
           { 
             name: "Airloom -- BSc Capstone Project",
             links: [
-              "https://github.com/jimbxb/comp30022-backend", 
-              "https://github.com/jimbxb/comp30022-frontend"
+              "https://github.com/jimbxb/comp30022-backend/", 
+              "https://github.com/jimbxb/comp30022-frontend/"
             ], 
             desc: [
               "University of Melbourne Bachelor of Science, Computing and Software Systems major, capstone project.", 
@@ -86,14 +108,14 @@
       [` * ${name}: ${data}`]
     );
 
-    const fmtPortfolioItem = ({name, links, desc}) => {
-      return [
+    const fmtPortfolioItem = ({name, links, desc}) => (
+      [
         data.portfolio.sep,
         "", 
         `[[b;;]${name}]: ${(links ?? []).join(" ; ")}`, 
         ""
       ].concat(desc).concat([""])
-    };
+    );
 
     $("#terminal").terminal((command, term) => {
       const [name, ...args] = command.trim().split(/\s/);
@@ -101,6 +123,7 @@
       
       switch (name) {
         case "help":
+        case "clear":
         case "contact":
         case "credits":
           if (0 !== args.length) {
@@ -111,7 +134,7 @@
 
       switch (name) {
         case "help":
-          term.echo(data.help.commands.flatMap(fmtHelpItem, [data.help.text]).join("\n"));
+          term.echo(data.help.text.concat(data.help.commands.flatMap(fmtHelpItem)).join("\n"));
           break;
         case "contact":
           term.echo(data.contact.items.flatMap(fmtContactItem, []).join("\n"));
@@ -123,12 +146,20 @@
           const query = args.length ? args : [""];
           const items = data.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
           term.echo(items.flatMap(fmtPortfolioItem, []).slice(1).join("\n"));
+          break;
         default:
           term.error(`Command '${name}' Not Found!`);
       }
     }, {
       greetings: data.greeting.lines.join("\n"),
-      checkArity: false
+      checkArity: false,
+      completion: [
+        "help",
+        "clear",
+        "contact",
+        "credits",
+        "portfolio"
+      ]
     })
   </script>
 </html>
