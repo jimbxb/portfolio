@@ -10,17 +10,12 @@
     const content = {
       help: {
         text: [
-          "Welcome to my portfolio.",
-          "Type one of the following commands to continue:"
+          "Type one of the following commands and press <enter>:"
         ],
         commands: [
           { 
             name: "help", 
             desc: ["Displays this message."] 
-          },
-          { 
-            name: "clear", 
-            desc: ["Clears the terminal."]
           },
           { 
             name: "contact", 
@@ -73,7 +68,8 @@
         error: "No portfolio items found.",
         items: [
           { 
-            name: "Scalr.io -- UniHack'21 Project", 
+            title: "Scalr.io",
+            subtitle: "UniHack'21 Project", 
             desc: [
               "First prize winning UniHack'21 submission built by my team, Null Pointer.",
               "Scalr.io offers a machine learning platform built for anyone to use."
@@ -84,7 +80,8 @@
             ]
           },
           { 
-            name: "Airloom -- BSc Capstone Project",
+            title: "Airloom",
+            subtitle: "BSc Capstone Project",
             links: [
               "https://github.com/jimbxb/comp30022-backend/", 
               "https://github.com/jimbxb/comp30022-frontend/"
@@ -110,10 +107,11 @@
       [`${name}: ${data}`]
     );
 
-    const fmtPortfolioItem = ({name, links, desc}) => (
+    const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
       [
         "", 
-        `[[bu;;]${name}]: ${(links ?? []).join(" | ")}`, 
+        `[[bu;;]${title}]${subtitle ? ` -- [[b;;]${subtitle}]` : ""}:`,
+        ... (links ? ["", `( ${links.join(" | ")} )`] : []), 
         ""
       ].concat(desc).concat([""])
     );
@@ -135,6 +133,8 @@
       }
 
       switch (name) {
+        case "":
+          break;
         case "help":
           term.echo(content.help.text.concat(content.help.commands.flatMap(fmtHelpItem)).join("\n"));
           break;
@@ -149,7 +149,9 @@
           break;
         case "portfolio":
           const query = args.length ? args : [""];
-          const items = content.portfolio.items.filter(({name}) => query.every((term) => name.toLowerCase().includes(term.toLowerCase())));
+          const items = content.portfolio.items.filter(({title, subtitle}) => 
+            query.every((term) => (title + " " + (subtitle ?? "")).toLowerCase().includes(term.toLowerCase()))
+          );
           if (items.length)
             term.echo(items.flatMap(fmtPortfolioItem).join("\n"));
           else 
