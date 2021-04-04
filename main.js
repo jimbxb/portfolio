@@ -57,9 +57,8 @@ const buildTerminal = (root, content) => ([
         term.echo(content.portfolio.items.flatMap(fmtPortfolioItem).join("\n"));
         break;
       case "search":
-        const query = args.length ? args : [""];
         const items = content.portfolio.items.filter(({title, subtitle}) => 
-          query.every((term) => (title + " " + (subtitle ?? "")).toLowerCase().includes(term.toLowerCase()))
+          args.every((term) => (title + " " + (subtitle ?? "")).toLowerCase().includes(term.toLowerCase()))
         );
         if (items.length)
           term.echo(items.flatMap(fmtPortfolioItem).join("\n"));
