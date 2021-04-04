@@ -22,11 +22,17 @@
             desc: ["Display's my contact information."] 
           },
           { 
-            name: "portfolio [query]", 
+            name: "list", 
             desc: [
-              "Displays a list of portfolio items.", 
-              "`query` is used to search for portfolio items.",
-              "e.g. `portfolio foo bar` will search for projects with \"foo\" and \"bar\" in the title"
+              "Displays a list of portfolio items."
+            ]
+          },
+          {
+            name: "search <query>",
+            desc: [
+              "Searches the portfolio items for relevant items.",
+              "<query> should be replaced with the search terms.",
+              "\t e.g. `search foo bar` searches for items with \"foo\" and \"bar\" in the title." 
             ]
           },
           { 
@@ -49,7 +55,7 @@
           ""
         ], 
         start: [
-          "Type `help` to begin.",
+          "Type `list` or `help` to begin.",
           ""
         ]
       },
@@ -65,7 +71,7 @@
         ]
       },
       portfolio: {
-        error: "No portfolio items found.",
+        error: "No items found.",
         items: [
           { 
             title: "Scalr.io",
@@ -124,10 +130,11 @@
         case "help":
         case "clear":
         case "contact":
+        case "list":
         case "credits":
         case "greetings":
           if (0 !== arity) {
-            term.error(`[Arity] Wrong number of arguments. Function '${name}' expects ${0} got ${arity}!`);
+            term.error(`Wrong number of arguments. Command \`${name}\` expects ${0} got ${arity}!`);
             return;
           }
       }
@@ -147,18 +154,21 @@
         case "greetings":
           term.echo(content.greetings.lines.join("\n"));
           break;
-        case "portfolio":
+        case "list":
+          term.echo(content.portfolio.items.flatMap(fmtPortfolioItem).join("\n"));
+          break;
+        case "search":
           const query = args.length ? args : [""];
           const items = content.portfolio.items.filter(({title, subtitle}) => 
             query.every((term) => (title + " " + (subtitle ?? "")).toLowerCase().includes(term.toLowerCase()))
           );
           if (items.length)
             term.echo(items.flatMap(fmtPortfolioItem).join("\n"));
-          else 
+          else
             term.error(content.portfolio.error);
           break;
         default:
-          term.error(`Command '${name}' Not Found!`);
+          term.error(`Unknown command \`${name}\`.`);
       }
     }, {
       greetings: content.greetings.lines.concat(content.greetings.start).join("\n"),
