@@ -20,12 +20,12 @@ const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
   ].concat(desc).concat([""])
 );
 
-const buildTerminal = (root, {portfolio, commands}) => {
-  const {help, clear, greetings, contact, credits, list, search} = commands;
+const buildTerminal = (parseCommand, {portfolio, commands}) => {
+  const {help, greetings, contact, credits, list, search} = commands;
 
   return ([
     (command, term) => {
-      const {name, args} = root.parse_command(command);
+      const {name, args} = parseCommand(command);
       const arity = args.length;
       
       if (name === "") return;
@@ -55,7 +55,7 @@ const buildTerminal = (root, {portfolio, commands}) => {
             break;
           case search.command:
             const items = portfolio.items.filter(({title, subtitle}) => 
-              args.every((term) => (title + " " + (subtitle ?? "")).toLowerCase().includes(term.toLowerCase()))
+              args.every((term) => [title, subtitle ?? ""].join(" ").toLowerCase().includes(term.toLowerCase()))
             );
             if (items.length)
               term.echo(items.flatMap(fmtPortfolioItem).join("\n"));

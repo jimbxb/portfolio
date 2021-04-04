@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>James Barnes - Portfolio</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/jquery.terminal@2.x.x/js/jquery.terminal.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jimbxb/portfolio@master/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jimbxb/portfolio@master/content.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jimbxb/portfolio/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jimbxb/portfolio/content.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"></script>
-    <title>James Barnes - Portfolio</title>
   </head>
   <body id="terminal"></body>
   <script>
-    const [termFn, termArgs] = buildTerminal($.terminal, content);
+    const [termFn, termArgs] = buildTerminal($.terminal.parse_command, content);
     $("#terminal").terminal(termFn, termArgs);
   </script>
 </html>
