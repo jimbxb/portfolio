@@ -20,7 +20,7 @@ const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
   ].concat(desc).concat([""])
 );
 
-const buildTerminal = (parseCommand, {portfolio, commands}) => {
+const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
   const {help, greetings, contact, credits, list, search} = commands;
 
   return [
@@ -33,7 +33,7 @@ const buildTerminal = (parseCommand, {portfolio, commands}) => {
       if (commands.hasOwnProperty(name)) {
         const {arity: expected} = commands[name];
         if (expected !== -1 && expected !== arity) {
-          term.error(`Wrong number of arguments. The command \`${name}\` expects ${expected} arguments and got ${arity}!`);
+          term.error(`Wrong number of arguments. The command \`${name}\` expects ${expected} arguments and got ${arity}.`);
           return;
         }
 
