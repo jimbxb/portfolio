@@ -97,6 +97,10 @@
         { 
           "name": "github", 
           "data": "https://github.com/jimbxb/" 
+        },
+        {
+          "name": "LinkedIn",
+          "data": "https://www.linkedin.com/in/james-barnes-b424a7180/"
         }
       ]
     },

@@ -1,23 +1,23 @@
+const fmtGenericItem = (maxLen) => ({name, data}) => (
+  [`${name} ${".".repeat(4 + maxLen - name.length)} ${data}`]
+);
 
 const fmtHelpItem = ({name, desc}) => (
-  [` * ${name}`].concat(desc.map(line => "\t" + line))
-);
-
-const fmtContactItem = ({name, data}) => (
-  [`${name}: ${data}`]
-);
-
-const fmtCreditItem = ({name, data}) => (
-  [`${name}: ${data}`]
+  [
+    ` * ${name}`,
+    ...desc.map(line => "\t" + line)
+  ]
 );
 
 const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
   [
     "", 
     `[[bu;;]${title}]${subtitle ? ` -- [[b;;]${subtitle}]` : ""}:`,
-    ... (links ? ["", `( ${links.join(" | ")} )`] : []), 
+    ...(links ? ["", `( ${links.join(" | ")} )`] : []), 
+    "",
+    ...desc,
     ""
-  ].concat(desc).concat([""])
+  ]
 );
 
 const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
@@ -32,7 +32,7 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
 
       if (commands.hasOwnProperty(name)) {
         const {arity: expected} = commands[name];
-        if (expected !== -1 && expected !== arity) {
+        if (expected >= 0 && expected !== arity) {
           term.error(`Wrong number of arguments. The command \`${name}\` expects ${expected} arguments and got ${arity}.`);
           return;
         }
@@ -42,10 +42,12 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
             term.echo(help.text.concat(help.commands.flatMap(fmtHelpItem)).join("\n"));
             break;
           case contact.command:
-            term.echo(contact.items.flatMap(fmtContactItem).join("\n"));
+            const contactMaxLen = contact.items.map(({name}) => name.length).reduce((a, b) => a > b ? a : b, 0);
+            term.echo(contact.items.flatMap(fmtGenericItem(contactMaxLen)).join("\n"));
             break;
-          case credits.command:
-            term.echo(credits.items.flatMap(fmtCreditItem).join("\n"));
+          case credits.command:            
+            const creditsMaxLen = credits.items.map(({name}) => name.length).reduce((a, b) => a > b ? a : b, 0);
+            term.echo(credits.items.flatMap(fmtGenericItem(creditsMaxLen)).join("\n"));
             break;
           case greetings.command:
             term.echo(greetings.lines.join("\n"));
