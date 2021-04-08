@@ -8,6 +8,7 @@
     <script>
       $(document).ready(() => {
         $.getJSON("https://cdn.jsdelivr.net/gh/jimbxb/portfolio/content.json", (content) => {
+          $("#terminal").text("");
           $("#terminal").terminal(...buildTerminal({parseCommand: $.terminal.parse_command}, content));
         });
       });
