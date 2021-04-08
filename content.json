@@ -53,7 +53,7 @@
           "desc": [
             "Searches the portfolio items for relevant items.",
             "<query> should be replaced with the search terms.",
-            "\t e.g. `search foo bar` searches for items with \"foo\" and \"bar\" in the title." 
+            "\te.g. `search foo bar` searches for items with \"foo\" and \"bar\" in the title." 
           ]
         },
         { 
@@ -108,6 +108,10 @@
       "command": "credits",
       "arity": 0,
       "items": [
+        { 
+          "name": "JQuery", 
+          "data": "https://jquery.com/" 
+        },
         { 
           "name": "JQueryTerminal", 
           "data": "https://terminal.jcubic.pl/" 
