@@ -91,11 +91,15 @@
       "arity": 0,
       "items": [
         { 
-          "name": "email", 
+          "name": "Email", 
           "data": "jamesbarnes2505@gmail.com" 
         },
         { 
-          "name": "github", 
+          "name": "Resume", 
+          "data": "https://github.com/jimbxb/resume/blob/master/resume.pdf/" 
+        },
+        { 
+          "name": "Github", 
           "data": "https://github.com/jimbxb/" 
         },
         {
