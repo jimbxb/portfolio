@@ -13,15 +13,19 @@ const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
   [
     "", 
     `[[bu;;]${title}]${subtitle ? ` -- [[b;;]${subtitle}]` : ""}:`,
-    ...(links ? ["", `( ${links.join(" | ")} )`] : []), 
+    ...(links?.length ? ["", `( ${links.join(" | ")} )`] : []), 
     "",
     ...desc,
     ""
   ]
 );
 
+const maxNameLen = (nameObjs) => nameObjs?.reduce((len, {name}) => len >= (name?.length ?? 0) ? len : name.length, 0);
+
 const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
   const {help, greetings, contact, credits, list, search} = commands;
+  const contactMaxLen = maxNameLen(contact.items);
+  const creditsMaxLen = maxNameLen(credits.items);
 
   return [
     (command, term) => {
@@ -33,40 +37,38 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
       if (commands.hasOwnProperty(name)) {
         const {arity: expected} = commands[name];
         if (expected >= 0 && expected !== arity) {
-          term.error(`Wrong number of arguments. The command \`${name}\` expects ${expected} arguments and got ${arity}.`);
+          term.error(`ERROR: the command \`${name}' expects ${expected} arguments and got ${arity}.`);
           return;
         }
 
         switch (name) {
           case help.command:
-            term.echo(help.text.concat(help.commands.flatMap(fmtHelpItem)).join("\n"));
+            term.echo(help.text.concat(help.commands.flatMap(fmtHelpItem)));
             break;
           case contact.command:
-            const contactMaxLen = contact.items.map(({name}) => name.length).reduce((a, b) => a > b ? a : b, 0);
-            term.echo(contact.items.flatMap(fmtGenericItem(contactMaxLen)).join("\n"));
+            term.echo(contact.items.flatMap(fmtGenericItem(contactMaxLen)));
             break;
-          case credits.command:            
-            const creditsMaxLen = credits.items.map(({name}) => name.length).reduce((a, b) => a > b ? a : b, 0);
-            term.echo(credits.items.flatMap(fmtGenericItem(creditsMaxLen)).join("\n"));
+          case credits.command:
+            term.echo(credits.items.flatMap(fmtGenericItem(creditsMaxLen)));
             break;
           case greetings.command:
-            term.echo(greetings.lines.join("\n"));
+            term.echo(greetings.lines);
             break;
           case list.command:
-            term.echo(portfolio.items.flatMap(fmtPortfolioItem).join("\n"));
+            term.echo(portfolio.items.flatMap(fmtPortfolioItem));
             break;
           case search.command:
             const items = portfolio.items.filter(({title, subtitle}) => 
               args.every((term) => [title, subtitle ?? ""].join(" ").toLowerCase().includes(term.toLowerCase()))
             );
-            if (items.length)
-              term.echo(items.flatMap(fmtPortfolioItem).join("\n"));
+            if (items?.length)
+              term.echo(items.flatMap(fmtPortfolioItem));
             else
               term.error(portfolio.error);
             break;
         }
       } else {
-        term.error(`Unknown command \`${name}\`.`);
+        term.error(`ERROR: unknown command \`${name}'.`);
       }
     }, 
     {
