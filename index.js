@@ -55,15 +55,15 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
           return;
         }
 
-        commands[name].exec(term, args);
+        commands[name].exec?.(term, args);
       } else {
         term.error(`ERROR: unknown command \`${name}'.`);
       }
     }, 
     {
       greetings: greetings.lines.concat(greetings.start).join("\n"),
-      checkArity: false,
       completion: Object.keys(commands),
+      checkArity: false,
       clear: false
     }
   ];
