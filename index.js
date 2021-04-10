@@ -23,9 +23,23 @@ const fmtPortfolioItem = ({title, subtitle, links, desc}) => (
 const maxNameLen = (nameObjs) => nameObjs?.reduce((len, {name}) => len >= (name?.length ?? 0) ? len : name.length, 0);
 
 const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
-  const {help, greetings, contact, credits, list, search} = commands;
+  const {help, clear, greetings, contact, credits, list, search} = commands;
   const contactMaxLen = maxNameLen(contact.items);
   const creditsMaxLen = maxNameLen(credits.items);
+
+  help.exec = (term) => term.echo(help.text.concat(help.commands.flatMap(fmtHelpItem)));
+  clear.exec = (term) => term.clear();
+  contact.exec = (term) => term.echo(contact.items.flatMap(fmtGenericItem(contactMaxLen)));
+  credits.exec = (term) => term.echo(credits.items.flatMap(fmtGenericItem(creditsMaxLen)));
+  greetings.exec = (term) => term.echo(greetings.lines);
+  list.exec = (term) => term.echo(portfolio.items.flatMap(fmtPortfolioItem));
+  search.exec = (term, args) => {
+    const items = portfolio.items.filter(({title, subtitle}) => 
+      args.every((term) => [title, subtitle ?? ""].join(" ").toLowerCase().includes(term.toLowerCase()))
+    );
+    if (items?.length) term.echo(items.flatMap(fmtPortfolioItem));
+    else term.error(portfolio.error);
+  }
 
   return [
     (command, term) => {
@@ -41,32 +55,7 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
           return;
         }
 
-        switch (name) {
-          case help.command:
-            term.echo(help.text.concat(help.commands.flatMap(fmtHelpItem)));
-            break;
-          case contact.command:
-            term.echo(contact.items.flatMap(fmtGenericItem(contactMaxLen)));
-            break;
-          case credits.command:
-            term.echo(credits.items.flatMap(fmtGenericItem(creditsMaxLen)));
-            break;
-          case greetings.command:
-            term.echo(greetings.lines);
-            break;
-          case list.command:
-            term.echo(portfolio.items.flatMap(fmtPortfolioItem));
-            break;
-          case search.command:
-            const items = portfolio.items.filter(({title, subtitle}) => 
-              args.every((term) => [title, subtitle ?? ""].join(" ").toLowerCase().includes(term.toLowerCase()))
-            );
-            if (items?.length)
-              term.echo(items.flatMap(fmtPortfolioItem));
-            else
-              term.error(portfolio.error);
-            break;
-        }
+        commands[name].exec(term, args);
       } else {
         term.error(`ERROR: unknown command \`${name}'.`);
       }
@@ -74,7 +63,8 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
     {
       greetings: greetings.lines.concat(greetings.start).join("\n"),
       checkArity: false,
-      completion: Object.keys(commands)
+      completion: Object.keys(commands),
+      clear: false
     }
   ];
 };
