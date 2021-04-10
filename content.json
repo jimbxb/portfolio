@@ -96,7 +96,7 @@
         },
         { 
           "name": "Resume", 
-          "data": "https://github.com/jimbxb/resume/blob/master/resume.pdf/" 
+          "data": "https://raw.githubusercontent.com/jimbxb/resume/master/resume.pdf" 
         },
         { 
           "name": "Github", 
