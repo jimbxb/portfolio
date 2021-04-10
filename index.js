@@ -1,5 +1,5 @@
-const fmtGenericItem = (maxLen) => ({name, data}) => (
-  [`${name} ${".".repeat(4 + maxLen - name.length)} ${data}`]
+const fmtGenericItem = (dotLen) => ({name, data}) => (
+  [`${name} ${".".repeat(4 + dotLen - name.length)} ${data}`]
 );
 
 const fmtHelpItem = ({name, desc}) => (
@@ -39,7 +39,7 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
     );
     if (items?.length) term.echo(items.flatMap(fmtPortfolioItem));
     else term.error(portfolio.error);
-  }
+  };
 
   return [
     (command, term) => {
