@@ -17,7 +17,6 @@
     "url": "https://github.com/jimbxb/portfolio/issues"
   },
   "homepage": "https://github.com/jimbxb/portfolio#readme",
-  "devDependencies": {
-    "reload": "^3.1.1"
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }
