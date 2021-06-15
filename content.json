@@ -4,14 +4,17 @@
     "items": [
       { 
         "title": "Scalr.io",
-        "subtitle": "UniHack'21 Project", 
+        "subtitle": "UNIHACK'21 Project", 
         "desc": [
-          "First prize winning UniHack'21 submission built by my team, Null Pointer.",
+          "First prize winning UNIHACK'21 submission built by my team, Null Pointer.",
           "Scalr.io offers a machine learning platform built for anyone to use."
         ], 
         "links": [
           "https://github.com/jimbxb/unihack21-backend/", 
           "https://github.com/jimbxb/unihack21-frontend/"
+        ],
+        "tags": [
+          "hackathon"
         ]
       },
       { 
@@ -24,6 +27,36 @@
         "desc": [
           "University of Melbourne Bachelor of Science, Computing and Software Systems major, capstone project.", 
           "A family heirloom register."
+        ],
+        "tags": [
+          "unimelb", "uom", "undergrad"
+        ]
+      },
+      { 
+        "title": "University of Melbourne Projects & Assignments",
+        "links": [
+          "https://github.com/jimbxb/unimelb/"
+        ], 
+        "desc": [
+          "A collection of assignments from my time as a student at the University of Melbourne.",
+          "Covering a range of subjects in both undergraduate and postgraduate levels."
+        ],
+        "tags": [
+          "unimelb", "uom", "projects", "assignments"
+        ]
+      },
+      { 
+        "title": "Parsons Problem Automarker",
+        "subtitle": "COMP10001 Automatic Marking Tool",
+        "links": [
+          "https://github.com/jimbxb/parsons-problem/"
+        ], 
+        "desc": [
+          "A tool to automatically mark parsons problems built for COMP10001 Foundations of Computing.",
+          "The tool provides a grade and feedback for answers given a correct solution, optimising the grade the student receives."
+        ],
+        "tags": [
+          "unimelb", "uom", "assignment", "undergrad", "tutoring"
         ]
       }
     ]

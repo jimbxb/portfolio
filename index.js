@@ -34,9 +34,13 @@ const buildTerminal = ({parseCommand}, {portfolio, commands}) => {
   greetings.exec = (term) => term.echo(greetings.lines);
   list.exec = (term) => term.echo(portfolio.items.flatMap(fmtPortfolioItem));
   search.exec = (term, args) => {
-    const items = portfolio.items.filter(({title, subtitle}) => 
-      args.every((term) => [title, subtitle ?? ""].join(" ").toLowerCase().includes(term.toLowerCase()))
-    );
+    const items = portfolio.items.filter(({title, subtitle, tags}) => 
+      args.every((term) => [
+        ...title.split(" "), 
+        ...(subtitle ?? "").split(" "),
+        ...tags ?? []
+      ].join(" ").toLowerCase().includes(term.toLowerCase())
+    ));
     if (items?.length) term.echo(items.flatMap(fmtPortfolioItem));
     else term.error(portfolio.error);
   };
