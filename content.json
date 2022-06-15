@@ -2,61 +2,106 @@
   "portfolio": {
     "error": "No items found.",
     "items": [
-      { 
+      {
+        "title": "Higher-Order Programming In Wybe",
+        "subtitle": "Master of Computer Science Research Project",
+        "desc": [
+          "A research project completed in fulfilment of the Master of Computer Science",
+          "at the University of Melbourne. The project focused on the implementation of",
+          "higher-order programming in the Wybe language, and prompted the implementation",
+          "and optimisation of the manipulation of global variables within the compiler's",
+          "intermediate representation, LPVM."
+        ],
+        "links": [
+          "https://github.com/jimbxb/mcs-project/",
+          "https://github.com/pschachte/wybe/"
+        ],
+        "tags": [
+          "mcs",
+          "unimelb"
+        ]
+      },
+      {
         "title": "Scalr.io",
-        "subtitle": "UNIHACK'21 Project", 
+        "subtitle": "UNIHACK'21 Project",
         "desc": [
           "First prize winning UNIHACK'21 submission built by my team, Null Pointer.",
-          "Scalr.io offers a machine learning platform built for anyone to use."
-        ], 
+          "Scalr.io offers a machine learning platform built for anyone to use, even",
+          "with no coding experience."
+        ],
         "links": [
-          "https://github.com/jimbxb/unihack21-backend/", 
+          "https://github.com/jimbxb/unihack21-backend/",
           "https://github.com/jimbxb/unihack21-frontend/"
         ],
         "tags": [
           "hackathon"
         ]
       },
-      { 
+      {
         "title": "Airloom",
         "subtitle": "BSc Capstone Project",
         "links": [
-          "https://github.com/jimbxb/comp30022-backend/", 
+          "https://github.com/jimbxb/comp30022-backend/",
           "https://github.com/jimbxb/comp30022-frontend/"
-        ], 
+        ],
         "desc": [
-          "University of Melbourne Bachelor of Science, Computing and Software Systems major, capstone project.", 
+          "University of Melbourne Bachelor of Science, Computing and Software Systems major, capstone project.",
           "A family heirloom register."
         ],
         "tags": [
-          "unimelb", "uom", "undergrad"
+          "unimelb",
+          "uom",
+          "undergrad"
         ]
       },
-      { 
+      {
+        "title": "Let Me Hoogle That For You",
+        "subtitle": "LMHTFY",
+        "desc": [
+          "A Hoogle clone of the Let Me Google That For You Site"
+        ],
+        "links": [
+          "https://github.com/jimbxb/lmhtfy/",
+          "https://https://jimbxb.github.io/lmhtfy/"
+        ],
+        "tags": [
+          "mcs",
+          "unimelb"
+        ]
+      },
+      {
         "title": "University of Melbourne Projects & Assignments",
         "links": [
           "https://github.com/jimbxb/unimelb/"
-        ], 
+        ],
         "desc": [
           "A collection of assignments from my time as a student at the University of Melbourne.",
           "Covering a range of subjects in both undergraduate and postgraduate levels."
         ],
         "tags": [
-          "unimelb", "uom", "projects", "assignments"
+          "unimelb",
+          "uom",
+          "projects",
+          "assignments"
         ]
       },
-      { 
+      {
         "title": "Parsons Problem Automarker",
         "subtitle": "COMP10001 Automatic Marking Tool",
         "links": [
           "https://github.com/jimbxb/parsons-problem/"
-        ], 
+        ],
         "desc": [
           "A tool to automatically mark parsons problems built for COMP10001 Foundations of Computing.",
-          "The tool provides a grade and feedback for answers given a correct solution, optimising the grade the student receives."
+          "The tool provides a grade and feedback for answers given a correct solution, ",
+          "optimising the grade the student receives."
         ],
         "tags": [
-          "unimelb", "uom", "assignment", "undergrad", "tutoring"
+          "unimelb",
+          "uom",
+          "assignment",
+          "undergrad",
+          "tutoring"
         ]
       }
     ]
@@ -69,32 +114,40 @@
         "Type one of the following commands and press <enter>:"
       ],
       "commands": [
-        { 
-          "name": "help", 
-          "desc": ["Displays this message."] 
+        {
+          "name": "help",
+          "desc": [
+            "Displays this message."
+          ]
         },
-        { 
-          "name": "contact", 
-          "desc": ["Displays my contact information."] 
+        {
+          "name": "contact",
+          "desc": [
+            "Displays my contact information."
+          ]
         },
-        { 
-          "name": "list", 
-          "desc": ["Displays a list of portfolio items."]
+        {
+          "name": "list",
+          "desc": [
+            "Displays a list of portfolio items."
+          ]
         },
         {
           "name": "search <query>",
           "desc": [
             "Searches the portfolio items for relevant items.",
             "<query> should be replaced with the search terms.",
-            "\te.g. `search foo bar' searches for items with \"foo\" and \"bar\" in the title." 
+            "\te.g. `search foo bar' searches for items with \"foo\" and \"bar\" in the title."
           ]
         },
-        { 
-          "name": "credits", 
-          "desc": ["Displays a list of credits."]
+        {
+          "name": "credits",
+          "desc": [
+            "Displays a list of credits."
+          ]
         }
       ]
-    }, 
+    },
     "clear": {
       "command": "clear",
       "arity": 0
@@ -113,7 +166,7 @@
         " / ____/ /_/ / /  / /_/ __/ /_/ / / / /_/ /",
         "/_/    \\____/_/   \\__/_/  \\____/_/_/\\____/",
         ""
-      ], 
+      ],
       "start": [
         "Type `list` or `help` to begin.",
         ""
@@ -123,17 +176,17 @@
       "command": "contact",
       "arity": 0,
       "items": [
-        { 
-          "name": "Email", 
-          "data": "jamesbarnes2505@gmail.com" 
+        {
+          "name": "Email",
+          "data": "jamesbarnes2505@gmail.com"
         },
-        { 
-          "name": "Resume", 
-          "data": "https://raw.githubusercontent.com/jimbxb/resume/master/resume.pdf" 
+        {
+          "name": "Resume",
+          "data": "https://raw.githubusercontent.com/jimbxb/resume/master/resume.pdf"
         },
-        { 
-          "name": "Github", 
-          "data": "https://github.com/jimbxb/" 
+        {
+          "name": "Github",
+          "data": "https://github.com/jimbxb/"
         },
         {
           "name": "LinkedIn",
@@ -145,13 +198,13 @@
       "command": "credits",
       "arity": 0,
       "items": [
-        { 
-          "name": "JQuery", 
-          "data": "https://jquery.com/" 
+        {
+          "name": "JQuery",
+          "data": "https://jquery.com/"
         },
-        { 
-          "name": "JQueryTerminal", 
-          "data": "https://terminal.jcubic.pl/" 
+        {
+          "name": "JQueryTerminal",
+          "data": "https://terminal.jcubic.pl/"
         }
       ]
     },
@@ -164,4 +217,4 @@
       "arity": -1
     }
   }
-}  
+}
