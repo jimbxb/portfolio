@@ -3,7 +3,7 @@
     "error": "No items found.",
     "items": [
       {
-        "title": "Higher-Order Programming In Wybe",
+        "title": "Higher-Order Programming in Wybe",
         "subtitle": "Master of Computer Science Research Project",
         "desc": [
           "A research project completed in fulfilment of the Master of Computer Science",
@@ -17,8 +17,10 @@
           "https://github.com/pschachte/wybe/"
         ],
         "tags": [
+          "unimelb",
+          "uom",
           "mcs",
-          "unimelb"
+          "postgrad"
         ]
       },
       {
@@ -39,7 +41,7 @@
       },
       {
         "title": "Airloom",
-        "subtitle": "BSc Capstone Project",
+        "subtitle": "Computing and Software Systems Project",
         "links": [
           "https://github.com/jimbxb/comp30022-backend/",
           "https://github.com/jimbxb/comp30022-frontend/"
@@ -51,6 +53,7 @@
         "tags": [
           "unimelb",
           "uom",
+          "bsc",
           "undergrad"
         ]
       },
@@ -58,16 +61,13 @@
         "title": "Let Me Hoogle That For You",
         "subtitle": "LMHTFY",
         "desc": [
-          "A Hoogle clone of the Let Me Google That For You Site"
+          "A Hoogle clone of the 'Let Me Google That For You' site."
         ],
         "links": [
           "https://github.com/jimbxb/lmhtfy/",
           "https://https://jimbxb.github.io/lmhtfy/"
         ],
-        "tags": [
-          "mcs",
-          "unimelb"
-        ]
+        "tags": []
       },
       {
         "title": "University of Melbourne Projects & Assignments",
@@ -82,7 +82,9 @@
           "unimelb",
           "uom",
           "projects",
-          "assignments"
+          "assignments",
+          "bsc",
+          "mcs"
         ]
       },
       {
@@ -92,9 +94,9 @@
           "https://github.com/jimbxb/parsons-problem/"
         ],
         "desc": [
-          "A tool to automatically mark parsons problems built for COMP10001 Foundations of Computing.",
+          "A tool to automatically mark Parsons problems built for COMP10001 Foundations of Computing.",
           "The tool provides a grade and feedback for answers given a correct solution, ",
-          "optimising the grade the student receives."
+          "maximising the grade the student receives."
         ],
         "tags": [
           "unimelb",
@@ -181,11 +183,11 @@
           "data": "jamesbarnes2505@gmail.com"
         },
         {
-          "name": "Resume",
+          "name": "Resume/CV",
           "data": "https://raw.githubusercontent.com/jimbxb/resume/master/resume.pdf"
         },
         {
-          "name": "Github",
+          "name": "GitHub",
           "data": "https://github.com/jimbxb/"
         },
         {
