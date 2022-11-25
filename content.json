@@ -125,7 +125,7 @@
         {
           "name": "contact",
           "desc": [
-            "Displays my contact information."
+            "Displays my contact information with a link to my resume/CV."
           ]
         },
         {
@@ -171,6 +171,7 @@
       ],
       "start": [
         "Type `list` or `help` to begin.",
+        "To contact me, type `contact`.",
         ""
       ]
     },
@@ -184,7 +185,7 @@
         },
         {
           "name": "Resume/CV",
-          "data": "https://raw.githubusercontent.com/jimbxb/resume/master/resume.pdf"
+          "data": "https://raw.githubusercontent.com/jimbxb/portfolio/master/docs/resume.pdf"
         },
         {
           "name": "GitHub",
